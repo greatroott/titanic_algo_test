@@ -1,0 +1,14 @@
+stages:
+  process:
+    cmd: python process_data.py
+    deps:
+    - process_data.py
+    outs:
+    - report_eda.html
+  train:
+    cmd: python train.py
+    deps:
+    - train.py
+    metrics:
+    - metrics.json:
+        cache: false
