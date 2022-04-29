@@ -21,6 +21,6 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git fetch --prune
-          echo "## Validating results" 
-          dvc metrics diff master --show-md >> report.md
+          echo "## Validating results" >> report.md
+          dvc metrics diff --show-md titanic-test >> report.md
           cml-send-comment report.md 
