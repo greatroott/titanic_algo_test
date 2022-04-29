@@ -1,16 +1,14 @@
 name: titanic-test
-on: 
-  push:
-  pull_request:
-    branches:
-      - master
+on: [push]
 jobs:
   run:
     runs-on: [ubuntu-latest]
     container: docker://dvcorg/cml-py3:latest
     steps:
       - uses: actions/checkout@v2
-      - name: cml_run
+      - uses: actions/checkout@v2
+      - uses: iterative/setup-cml@v1
+      - name: cml_run and train model
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }} 
         run: |
