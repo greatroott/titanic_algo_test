@@ -1,0 +1,24 @@
+name: titanic-test
+on: 
+  push:
+  pull_request:
+    branches:
+      - master
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    container: docker://dvcorg/cml-py3:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: cml_run
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }} 
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          dvc repro -f
+
+          git fetch --prune
+          echo "## Validating results" 
+          dvc metrics diff --show-md master >> report.md
+          cml-send-comment report.md 
