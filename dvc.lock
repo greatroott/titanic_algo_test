@@ -8,7 +8,7 @@ stages:
       size: 605
     outs:
     - path: metrics.json
-      md5: 85348b75aca367dc8cd0922aff1f9977
+      md5: 583e355d13bf087dcaa3bb4de6945750
       size: 220
   process:
     cmd: python process_data.py
